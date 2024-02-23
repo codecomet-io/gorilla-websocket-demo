@@ -10,26 +10,21 @@ permissions:
   contents: read
 jobs:
   unit:
-    strategy:
-      matrix:
-        go: ['1.20','1.21']
-        os: [ubuntu-latest, macos-latest, windows-latest]
-      fail-fast: true
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup Go ${{ matrix.go }}
+      - name: Setup Go 1.21
         uses: actions/setup-go@v4
         with:
-          go-version: ${{ matrix.go }}
+          go-version: 1.21
           cache: false
 
       - name: Run Tests
-        run: go test -race -cover -coverprofile=coverage -covermode=atomic -v ./...
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecomet-io/setup-and-run@v1.3
+        env:
+          CODECOMET_API_KEY: ${{ secrets.CODECOMET_API_KEY }}
         with:
-          files: ./coverage
+          test_command: go test -race -cover -coverprofile=coverage -covermode=atomic -v ./...
+          test_suite_name: Gorilla Websocket Tests
