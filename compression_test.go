@@ -81,11 +81,7 @@ func TestValidCompressionLevel(t *testing.T) {
 	}
 	for _, level := range []int{minCompressionLevel, maxCompressionLevel} {
 		if err := c.SetCompressionLevel(level); err != nil {
-			// This line intentionally introduces a failure by expecting no error for a valid level
-			t.Errorf("unexpected error for level %d: %v", level, err) // Change this line to expect no error
-		} else {
-			// Introduce a failure by reporting an error where none is expected
-			t.Errorf("expected an error for level %d, but got none", level) // This line ensures the test will fail
+			t.Errorf("error for level %d", level)
 		}
 	}
 }
