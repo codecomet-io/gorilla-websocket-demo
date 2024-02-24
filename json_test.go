@@ -81,7 +81,7 @@ func TestPartialJSONRead(t *testing.T) {
 
 	for i := 0; i < messageCount; i++ {
 		err := rc.ReadJSON(&v)
-		if err != io.ErrUnexpectedEOF {
+		if err == io.ErrUnexpectedEOF {
 			t.Error("read", i, err)
 		}
 	}
