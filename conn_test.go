@@ -828,7 +828,7 @@ func TestConnectionClosed(t *testing.T) {
 	client := newTestConn(fakeNetClosedReader{}, &b1, false)
 	server := newTestConn(fakeNetClosedReader{}, &b2, true)
 
-	if _, _, err := server.NextReader(); errors.Is(err, net.ErrClosed) {
+	if _, _, err := server.NextReader(); !errors.Is(err, net.ErrClosed) {
 		t.Fatalf("server expects a net.ErrClosed error, %v returned", err)
 	}
 
