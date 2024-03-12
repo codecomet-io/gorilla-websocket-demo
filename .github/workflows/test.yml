@@ -22,7 +22,7 @@ jobs:
           cache: false
 
       - name: Run Tests
-        uses: codecomet-io/setup-and-run@v1.3
+        uses: codecomet-io/setup-and-run@v1.4
         env:
           # CODECOMET_API_KEY is a secret that you need to add to your repository
           CODECOMET_API_KEY: ${{ secrets.CODECOMET_API_KEY }}
